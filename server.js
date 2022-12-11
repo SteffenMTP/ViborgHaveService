@@ -12,8 +12,6 @@ db. once('open', () => console.log("Database up and running!"))
 
 
 // APP
-// const formData = require('express-form-data')
-// app.use(formData.parse())                       // Multipart formdata
 app.use(express.json())                         // JSON
 app.use(express.urlencoded({extended: true}))   // URL Encoded
 app.use(cors({origin: true}))                   //cors - cross origin ressource sharing

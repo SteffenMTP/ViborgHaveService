@@ -18,10 +18,10 @@ const upload = multer({
 })
 
 
-//GET ALL til endpoint product
+//GET ALL til endpoint service
 router.get('/', async(req, res) => {
 
-    console.log("route product GET ALL")
+    console.log("route service GET ALL")
 
     try {
         let services = await Service.find()
@@ -34,10 +34,10 @@ router.get('/', async(req, res) => {
 
 })
 
-//GET BY ID til endpoint product
+//GET BY ID til endpoint service
 router.get('/:id', async(req, res) => {
     
-    console.log("route product GET BY ID")
+    console.log("route service GET BY ID")
     
     try {
         
@@ -53,11 +53,11 @@ router.get('/:id', async(req, res) => {
 
 })
 
-//POST til endpoint product
+//POST til endpoint service
 router.post('/', upload.single("image"), async(req, res) => {
 
     // Skal kunne modtage fil/image
-    console.log("route product POST")
+    console.log("route service POST")
 
     try {
         let service = new Service(req.body)
@@ -73,11 +73,10 @@ router.post('/', upload.single("image"), async(req, res) => {
 
 })
 
-//PUT til endpoint product
-// https://mongoosejs.com/docs/validation.html#update-validators //Hvis du vil have validering til også at fungere ved PUT
+//PUT til endpoint service
 router.put('/:id', upload.single("image"), async(req, res) => {
 
-    console.log("route product PUT")
+    console.log("route service PUT")
     
     try {
         
@@ -104,10 +103,10 @@ router.put('/:id', upload.single("image"), async(req, res) => {
 
 })
 
-//DELETE til endpoint product
+//DELETE til endpoint service
 router.delete('/:id', async(req, res) => {
 
-    console.log("route product DELETE")
+    console.log("route service DELETE")
 
     try {
         
@@ -115,7 +114,7 @@ router.delete('/:id', async(req, res) => {
 
         if(service == null) return res.status(404).json({message: "Data kunne ikke findes/slettes"})
 
-        return res.status(200).json({message: "Product is deleted"})
+        return res.status(200).json({message: "service is deleted"})
         
     } catch (error) {
         return res.status(400).json( { message: "An error occured: " + error.message } )
