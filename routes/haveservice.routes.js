@@ -3,7 +3,7 @@ const Service = require('../models/haveservice.model') // mongoose-schema
 const express = require('express')
 const router = express.Router()
 
-//Multer til håndtering af filer fx images
+//Multer til håndtering af filer i dette tilfælde images
 const multer = require('multer')
 const upload = multer({
     storage: multer.diskStorage({
@@ -11,7 +11,6 @@ const upload = multer({
             cb(null, 'public/images')
         },
         filename: function ( req, file, cb) {
-            // cb(null, Date.now() + '-' + file.originalname )
             cb(null, file.originalname )
         }
     })
@@ -65,7 +64,7 @@ router.post('/', upload.single("image"), async(req, res) => {
 
 
         await service.save()
-        return res.status(201).json( { message: 'Ny er oprettet', created: service } )
+        return res.status(201).json( { message: 'New is created', created: service } )
         
     } catch (error) {
         return res.status(400).json( { message: "An error occured: " + error.message } )
@@ -90,7 +89,7 @@ router.put('/:id', upload.single("image"), async(req, res) => {
 
         let service = await Service.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true})
         
-        if(service == null) return res.status(404).json({message: "Data kunne ikke findes/rettes"})
+        if(service == null) return res.status(404).json({message: "Data could not be found or edited"})
         
         return res.status(201).json({message: 'Edit complete', updated: service})
 
@@ -112,7 +111,7 @@ router.delete('/:id', async(req, res) => {
         
         let service = await Service.findByIdAndDelete(req.params.id)
 
-        if(service == null) return res.status(404).json({message: "Data kunne ikke findes/slettes"})
+        if(service == null) return res.status(404).json({message: "Data could not be found or deleted"})
 
         return res.status(200).json({message: "service is deleted"})
         

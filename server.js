@@ -7,14 +7,14 @@ const app = express()
 const mongoose = require('mongoose')
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true, autoIndex: true})
 const db = mongoose.connection
-db.on('error', (err) => console.log("FEJL" + err))
+db.on('error', (err) => console.log("Error" + err))
 db. once('open', () => console.log("Database up and running!"))
 
 
 // APP
 app.use(express.json())                         // JSON
 app.use(express.urlencoded({extended: true}))   // URL Encoded
-app.use(cors({origin: true}))                   //cors - cross origin ressource sharing
+app.use(cors({origin: true}))                   // cors - cross origin ressource sharing
 app.use(express.static('public'))               // hvorfra statiske filer må hentes
 
 
@@ -22,7 +22,7 @@ app.use(express.static('public'))               // hvorfra statiske filer må he
 app.get('/', async(req, res) => {
 
     console.log("Serveren svarer")
-    return res.status(200).json({message: "Velkommen til serveren" } )
+    return res.status(200).json({message: "Welcome to the server" } )
 
 
 })
@@ -38,5 +38,5 @@ app.get('*', async (req, res) => {
 
 
 // LISTEN
-app.listen(process.env.PORT, ()=> console.log("Server startet - lytter på port: " + process.env.PORT ) )
+app.listen(process.env.PORT, ()=> console.log("Server startet - listening to port: " + process.env.PORT ) )
 
